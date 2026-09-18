@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>WhiteBoard.Rendering.Tests</RootNamespace>
+    <AssemblyName>WhiteBoard.Rendering.Tests</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\WhiteBoard.Core\WhiteBoard.Core.csproj" />
+    <ProjectReference Include="..\..\src\WhiteBoard.Rendering\WhiteBoard.Rendering.csproj" />
+  </ItemGroup>
+
+  <!-- 复用 Core 测试的自研运行器与断言（同一份文件，避免重复维护） -->
+  <ItemGroup>
+    <Compile Include="..\WhiteBoard.Core.Tests\TestRunner.cs" Link="TestRunner.cs" />
+  </ItemGroup>
+
+</Project>

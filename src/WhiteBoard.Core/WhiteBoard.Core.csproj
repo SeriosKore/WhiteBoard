@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>WhiteBoard.Core</RootNamespace>
+    <AssemblyName>WhiteBoard.Core</AssemblyName>
+  </PropertyGroup>
+
+  <!-- color.txt 是程序内置默认主题的来源，作为嵌入资源编译进程序 -->
+  <ItemGroup>
+    <None Remove="Resources\color.txt" />
+    <EmbeddedResource Include="Resources\color.txt">
+      <LogicalName>WhiteBoard.Core.Resources.color.txt</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

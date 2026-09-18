@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>WhiteBoard.Core.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <OutputType>Exe</OutputType>
+    <!-- 自研轻量测试运行器：零第三方依赖，可离线跑，符合 I1（零第三方原生/托管包） -->
+    <AssemblyName>WhiteBoard.Core.Tests</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\WhiteBoard.Core\WhiteBoard.Core.csproj" />
+  </ItemGroup>
+
+</Project>

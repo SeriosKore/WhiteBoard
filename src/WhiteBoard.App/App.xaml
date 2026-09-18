@@ -1,0 +1,10 @@
+<Application x:Class="WhiteBoard.App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!--
+    刻意不使用 StartupUri：主窗口由 App.OnStartup 在"正常启动"分支里显式创建。
+    否则即使走 self-test / render-smoke 这类无界面入口，WPF 也会照样构造主窗口
+    （于是在没有桌面会话的环境里会直接崩掉，而且会闪一个窗口出来）。
+  -->
+  <Application.Resources />
+</Application>

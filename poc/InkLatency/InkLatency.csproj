@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>WhiteBoard.Poc.InkLatency</RootNamespace>
+    <AssemblyName>InkLatency</AssemblyName>
+    <SelfContained>false</SelfContained>
+    <RollForward>LatestMinor</RollForward>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\WhiteBoard.Core\WhiteBoard.Core.csproj" />
+  </ItemGroup>
+
+</Project>

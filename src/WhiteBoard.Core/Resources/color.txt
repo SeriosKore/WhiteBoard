@@ -1,0 +1,19 @@
+{
+  "_note": "白板主题色规范文件（程序内置默认值的来源）。格式由程序定义（JSON）。构建时作为嵌入资源打进程序；运行时若存在 <exe同级>/data/theme/color.txt 则以该文件为准（首次运行会自动写出本文件内容，便于用户查看与修改）。自 S2 起本文件用于保存用户的预设（多套预设、可命名）。",
+  "version": 1,
+  "defaultPreset": "blackboard",
+  "presets": [
+    {
+      "id": "blackboard",
+      "name": "黑板",
+      "backgroundType": "solid",
+      "background": "#2F4F3A",
+      "colors": [
+        { "id": "white",  "name": "白笔", "value": "#F5F5F0" },
+        { "id": "yellow", "name": "黄笔", "value": "#EED858" },
+        { "id": "red",    "name": "红笔", "value": "#F47A6E" },
+        { "id": "blue",   "name": "蓝笔", "value": "#6E9FE0" }
+      ]
+    }
+  ]
+}

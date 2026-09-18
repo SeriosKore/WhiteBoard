@@ -1,0 +1,50 @@
+<Window x:Class="WhiteBoard.Poc.InkLatency.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PoC-A · 笔迹延迟三路线对比" Height="860" Width="1320"
+        WindowStartupLocation="CenterScreen">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <Border Grid.Row="0" Background="#1B1B1B" Padding="12,10">
+      <StackPanel>
+        <TextBlock Foreground="#F5F5F0" FontSize="15" FontWeight="Bold"
+                   Text="PoC-A · 笔迹延迟三路线对比" />
+        <TextBlock x:Name="EnvText" Foreground="#9CDCFE" FontSize="12" Margin="0,5,0,0" />
+      </StackPanel>
+    </Border>
+
+    <Border Grid.Row="1" Background="#262626" Padding="12,8">
+      <WrapPanel Orientation="Horizontal">
+        <TextBlock Text="渲染路线：" Foreground="#DDDDDD" VerticalAlignment="Center" Margin="0,0,6,0" />
+        <StackPanel x:Name="ModePanel" Orientation="Horizontal" />
+
+        <TextBlock Text="  颜色：" Foreground="#DDDDDD" VerticalAlignment="Center" Margin="12,0,6,0" />
+        <StackPanel x:Name="ColorPanel" Orientation="Horizontal" />
+
+        <TextBlock Text="  笔宽：" Foreground="#DDDDDD" VerticalAlignment="Center" Margin="12,0,6,0" />
+        <StackPanel x:Name="WidthPanel" Orientation="Horizontal" />
+
+        <Button x:Name="ClearButton" Content="清空" Padding="12,4" Margin="16,0,0,0" />
+        <Button x:Name="ExportButton" Content="导出 CSV" Padding="12,4" Margin="8,0,0,0" />
+      </WrapPanel>
+    </Border>
+
+    <Grid Grid.Row="2" x:Name="RouteHost" />
+
+    <Border Grid.Row="3" Background="#1B1B1B" Padding="12,10">
+      <StackPanel>
+        <TextBlock x:Name="StatsText" Foreground="#EED858" FontSize="13"
+                   FontFamily="Consolas,Microsoft YaHei UI" Text="尚无样本" />
+        <TextBlock x:Name="ExportText" Foreground="#8FD98F" FontSize="12" Margin="0,5,0,0" />
+        <TextBlock Foreground="#BBBBBB" FontSize="12" Margin="0,6,0,0" TextWrapping="Wrap"
+                   Text="用法：用笔 / 手指 / 鼠标在下方区域连续书写 30 秒以上；切换路线各测一轮，最后点「导出 CSV」。CSV 落在程序同级 data\latency\ 下（符合 C3：程序数据不出程序文件夹）。" />
+      </StackPanel>
+    </Border>
+  </Grid>
+</Window>

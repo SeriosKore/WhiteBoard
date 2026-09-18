@@ -1,0 +1,161 @@
+<Window x:Class="WhiteBoard.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wb="clr-namespace:WhiteBoard.App.Rendering"
+        Title="白板 WhiteBoard" Height="820" Width="1320"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E1E">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <!-- ① 文件工具栏（用 WrapPanel：窄屏时换行而不是把按钮裁掉） -->
+    <Border Grid.Row="0" Background="#181818" Padding="10,7">
+      <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
+        <TextBlock Text="文件" Foreground="#8A8A8A" FontSize="12" VerticalAlignment="Center" Margin="0,0,8,0" />
+        <Button x:Name="BtnNew"    Content="新建" Width="52" Margin="0,0,6,0" Click="OnNew" />
+        <Button x:Name="BtnOpen"   Content="打开" Width="52" Margin="0,0,6,0" Click="OnOpen" />
+        <Button x:Name="BtnAppend" Content="追加导入" Width="76" Margin="0,0,6,0" Click="OnAppendImport" />
+        <Button x:Name="BtnSave"   Content="保存" Width="52" Margin="0,0,6,0" Click="OnSave" />
+        <Button x:Name="BtnSaveAs" Content="另存为" Width="62" Margin="0,0,6,0" Click="OnSaveAs" />
+        <Button x:Name="BtnRecent" Content="最近 ▾" Width="62" Margin="0,0,6,0" Click="OnRecent" />
+        <Button x:Name="BtnExport" Content="导出 PNG" Width="76" Margin="0,0,6,0" Click="OnExportPng" />
+        <Button x:Name="BtnExportAll" Content="导出全部页" Width="90" Margin="0,0,6,0" Click="OnExportAllPng" />
+        <Button x:Name="BtnOpenFolder" Content="打开数据目录" Width="100" Margin="0,0,6,0" Click="OnOpenDataFolder" />
+        <Button x:Name="BtnHelp" Content="快捷键" Width="62" Margin="0,0,18,0" Click="OnOpenHelp" />
+
+        <TextBlock x:Name="FileTitleText" Foreground="#EED858" FontSize="12" VerticalAlignment="Center" />
+      </WrapPanel>
+    </Border>
+
+    <!-- ② 工具与画笔（同样用 WrapPanel 抗窄屏） -->
+    <Border Grid.Row="1" Background="#1E1E1E" Padding="10,8">
+      <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
+        <TextBlock Text="工具" Foreground="#8A8A8A" FontSize="12" VerticalAlignment="Center" Margin="0,0,8,0" />
+        <Button x:Name="BtnSelect"  Content="选择" Width="56" Margin="0,0,6,0" Click="OnToolSelect" />
+        <Button x:Name="BtnText"    Content="文本" Width="56" Margin="0,0,6,0" Click="OnToolText" />
+        <Button x:Name="BtnPen"     Content="画笔" Width="56" Margin="0,0,6,0" Click="OnToolPen" />
+        <Button x:Name="BtnLine"    Content="直线" Width="56" Margin="0,0,6,0" Click="OnToolLine" />
+        <Button x:Name="BtnRect"    Content="矩形" Width="56" Margin="0,0,6,0" Click="OnToolRect" />
+        <Button x:Name="BtnEllipse" Content="椭圆" Width="56" Margin="0,0,6,0" Click="OnToolEllipse" />
+        <Button x:Name="BtnEraser"  Content="橡皮" Width="56" Margin="0,0,18,0" Click="OnToolEraser" />
+
+        <TextBlock Text="颜色" Foreground="#8A8A8A" FontSize="12" VerticalAlignment="Center" Margin="0,0,8,0" />
+        <ItemsControl x:Name="ColorList" VerticalAlignment="Center" Margin="0,0,18,0">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+        <TextBlock Text="笔宽" Foreground="#8A8A8A" FontSize="12" VerticalAlignment="Center" Margin="0,0,8,0" />
+        <Button x:Name="BtnW3"  Content="细" Width="42" Margin="0,0,6,0" Click="OnWidth3" />
+        <Button x:Name="BtnW6"  Content="中" Width="42" Margin="0,0,6,0" Click="OnWidth6" />
+        <Button x:Name="BtnW10" Content="粗" Width="42" Margin="0,0,18,0" Click="OnWidth10" />
+
+        <TextBlock Text="字号" Foreground="#8A8A8A" FontSize="12" VerticalAlignment="Center" Margin="0,0,8,0" />
+        <Button x:Name="BtnFontS" Content="小" Width="42" Margin="0,0,6,0" Click="OnFontSmall" />
+        <Button x:Name="BtnFontM" Content="中" Width="42" Margin="0,0,6,0" Click="OnFontMedium" />
+        <Button x:Name="BtnFontL" Content="大" Width="42" Margin="0,0,6,0" Click="OnFontLarge" />
+        <Button x:Name="BtnFontB" Content="粗体" Width="52" Margin="0,0,18,0" Click="OnToggleBold" />
+
+        <Button x:Name="BtnUndo"  Content="撤销" Width="56" Margin="0,0,6,0" Click="OnUndo" />
+        <Button x:Name="BtnRedo"  Content="重做" Width="56" Margin="0,0,6,0" Click="OnRedo" />
+        <Button x:Name="BtnClear" Content="清空" Width="56" Margin="0,0,18,0" Click="OnClear" />
+
+        <TextBlock Text="选中" Foreground="#8A8A8A" FontSize="12" VerticalAlignment="Center" Margin="0,0,8,0" />
+        <Button x:Name="BtnMultiSelect" Content="多选" Width="52" Margin="0,0,6,0" Click="OnToggleMultiSelect" />
+        <Button x:Name="BtnLasso"       Content="圈选" Width="52" Margin="0,0,6,0" Click="OnToggleLasso" />
+        <Button x:Name="BtnSelAll"      Content="全选" Width="52" Margin="0,0,6,0" Click="OnSelectAll" />
+        <Button x:Name="BtnDelete"      Content="删除" Width="52" Margin="0,0,6,0" Click="OnDeleteSelection" />
+        <Button x:Name="BtnClone"       Content="克隆" Width="52" Margin="0,0,6,0" Click="OnCloneSelection" />
+        <Button x:Name="BtnFront"       Content="置顶" Width="52" Margin="0,0,6,0" Click="OnBringToFront" />
+        <Button x:Name="BtnBack"        Content="置底" Width="52" Margin="0,0,6,0" Click="OnSendToBack" />
+        <Button x:Name="BtnSelWidth"    Content="用当前笔宽" Width="90" Margin="0,0,18,0" Click="OnApplyPenWidthToSelection" />
+
+        <Button x:Name="BtnZoomOut"   Content="缩小" Width="56" Margin="0,0,6,0" Click="OnZoomOut" />
+        <Button x:Name="BtnZoomIn"    Content="放大" Width="56" Margin="0,0,6,0" Click="OnZoomIn" />
+        <Button x:Name="BtnResetView" Content="100%" Width="56" Margin="0,0,6,0" Click="OnResetView" />
+        <Button x:Name="BtnFullScreen" Content="全屏" Width="56" Margin="0,0,6,0" Click="OnToggleFullScreen" />
+      </WrapPanel>
+    </Border>
+
+    <!-- ③ 页面目录 + 画布 -->
+    <Grid Grid.Row="2">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <Border x:Name="PagePanel" Grid.Column="0" Width="176" Background="#151515"
+              BorderBrush="#333333" BorderThickness="0,0,1,0">
+        <DockPanel>
+          <StackPanel DockPanel.Dock="Top" Margin="8,8,8,6">
+            <TextBlock Foreground="#B9B9B9" FontSize="12" Margin="0,0,0,6">
+              <Run Text="页面" />
+              <Run x:Name="PageCountRun" Text="1 / 1" Foreground="#EED858" />
+            </TextBlock>
+            <WrapPanel>
+              <Button x:Name="BtnPageNew"  Content="新建页" Width="74" Margin="0,0,6,6" Click="OnPageNew" />
+              <Button x:Name="BtnPageCopy" Content="复制页" Width="74" Margin="0,0,0,6" Click="OnPageCopy" />
+              <Button x:Name="BtnPageDel"  Content="删除页" Width="74" Margin="0,0,6,6" Click="OnPageDelete" />
+              <Button x:Name="BtnPagePrev" Content="上一页" Width="74" Margin="0,0,0,6" Click="OnPagePrev" />
+              <Button x:Name="BtnPageNext" Content="下一页" Width="74" Margin="0,0,6,6" Click="OnPageNext" />
+              <Button x:Name="BtnPageMove" Content="移到…" Width="74" Margin="0,0,0,6" Click="OnPageMoveObjects" />
+            </WrapPanel>
+            <TextBlock Text="点缩略图切页；把选中的对象拖到缩略图上可搬到那一页"
+                       Foreground="#7A7A7A" FontSize="10" TextWrapping="Wrap" />
+          </StackPanel>
+
+          <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl x:Name="PageList" Margin="8,0,8,8" />
+          </ScrollViewer>
+        </DockPanel>
+      </Border>
+
+      <Border Grid.Column="1" BorderBrush="#333333" BorderThickness="0,1,0,1">
+        <Grid>
+          <wb:CanvasHost x:Name="Board" />
+          <!--
+            就地文本编辑：真 TextBox 叠加（中文 IME 天然可用，评审 T5）。
+
+            ⚠️ 这里的 Canvas 必须用 Background="{x:Null}"（默认值），**不能给 Transparent**：
+            带背景的画布会参与命中测试，而它盖在 CanvasHost 之上，
+            于是所有指针事件都被这一层吃掉 —— 表现就是"笔和所有绘图工具都画不出东西"。
+            Background=null 时画布自身不参与命中测试，它里面的 TextBox 仍然可点。
+          -->
+          <Canvas x:Name="EditorLayer" ClipToBounds="True" Background="{x:Null}">
+            <TextBox x:Name="TextEditor" Visibility="Collapsed"
+                     AcceptsReturn="True" TextWrapping="Wrap"
+                     Background="#33000000" BorderBrush="#EED858" BorderThickness="1"
+                     Padding="2,0,2,0" CaretBrush="#EED858"
+                     VerticalContentAlignment="Top"
+                     PreviewKeyDown="OnTextEditorKeyDown"
+                     LostKeyboardFocus="OnTextEditorLostFocus" />
+          </Canvas>
+        </Grid>
+      </Border>
+    </Grid>
+
+    <!-- ④ 状态栏 -->
+    <Border Grid.Row="3" Background="#26301F" Padding="12,7">
+      <StackPanel>
+        <DockPanel>
+          <Button x:Name="BtnUndoPageOp" DockPanel.Dock="Right" Content="撤销页面操作" Width="110"
+                  Margin="10,0,0,0" Visibility="Collapsed" Click="OnUndoPageOp" />
+          <TextBlock x:Name="StatusText" Foreground="#EED858" FontSize="12" Text="就绪"
+                     TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+        </DockPanel>
+        <TextBlock x:Name="DataDirText" Foreground="#9CDCFE" FontSize="11" Margin="0,3,0,0" />
+        <TextBlock x:Name="ThemeText"  Foreground="#B9B9B9" FontSize="11" Margin="0,2,0,0" />
+        <TextBlock x:Name="WarnText"   Foreground="#F47A6E" FontSize="11" Margin="0,2,0,0"
+                   TextWrapping="Wrap" Visibility="Collapsed" />
+      </StackPanel>
+    </Border>
+  </Grid>
+</Window>

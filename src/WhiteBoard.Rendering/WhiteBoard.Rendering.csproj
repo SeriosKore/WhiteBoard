@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>WhiteBoard.Rendering</RootNamespace>
+    <AssemblyName>WhiteBoard.Rendering</AssemblyName>
+    <!-- 只有这一层依赖 WPF；Core 保持 net10.0（UI 无关、可单测） -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WhiteBoard.Core\WhiteBoard.Core.csproj" />
+  </ItemGroup>
+
+</Project>
