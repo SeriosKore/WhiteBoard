@@ -10,6 +10,7 @@
 | `M0可行性分析与待决策清单.md` | M0 止损闸门：四项 PoC 的可行性分析、验收口径、待决策清单（P0 已决策，P1/P2 待定） | ✅ 生效 |
 | `M0进展报告.md` | **M0 实施进展**：已完成产出、PoC-D 硬结论、4 项需回写设计的实测事实、一键验证流水线 | ✅ 生效 |
 | `S1产品与技术评审.md` | 一期的产品评审 + 技术评审：产品缺口（G1~G6）、技术模糊点（T1~T17）、决策结果、专项评估 | ✅ 生效 |
+| **`发布说明_preview-v0.1b.md`** | **本版发布说明**：内容清单、验证证据、安装方式、已知限制、真机验收待办（GitHub Release 正文即此文件） | ✅ 生效 |
 | **`../TODO.md`** | **待办清单**：你必须做的真机事项、代码侧功能缺口、偏离计划书待裁决的 5 处、S2/S3/S4 计划内、技术债 | ✅ 生效 |
 | **`用户手册.md`** | **给老师与部署者的使用手册**：界面导览、逐步操作、多页面、文件与导出、自动保存、主题自定义、常见问题、S1 已知限制、部署者清单与命令行入口 | ✅ 生效 |
 | **`人工验收清单.md`** | **你要做什么 + 怎么验收**：5 分钟双击核验、必须由人做的 P0/P1 事项、决策复核、已产出的证据 | ✅ 生效 |
@@ -67,6 +68,7 @@
 | `powershell -ExecutionPolicy Bypass -File scripts\ui-drag-test.ps1 -ExePath <exe> [-OutDir <目录>]` | **拖动交互自检**：真鼠标拖对象 / 中键平移 / 拖到缩略图跨页搬运 / 拖缩略图改页序（6 项） |
 | `powershell -ExecutionPolicy Bypass -File scripts\ui-tools-test.ps1 -ExePath <exe> [-OutDir <目录>]` | **画布交互自检**：真实鼠标/键盘逐个确认画笔/矩形/椭圆/橡皮/文本可用（9 项）；无桌面会话时如实报告“跳过” |
 | `powershell -ExecutionPolicy Bypass -File scripts\screenshot.ps1 -ExePath <exe> -OutPath <png> [-Demo] [-Size 1000x700] [-AppArgs "--demo-select"]` | 抓真实窗口截图，并报告"非黑像素比例"以判定截图是否有效 |
+| `powershell -ExecutionPolicy Bypass -File scripts\publish-release.ps1 -Tag <tag> -Name <标题> -NotesFile <md> [-AssetPath <zip>]` | **发布 GitHub Release**：创建/复用 Release 并上传附件（复用 git 凭据，不回显 token，可重复执行） |
 | `powershell -ExecutionPolicy Bypass -File scripts\backup.ps1 [-IncludePublish]` | **项目备份**：带时间戳的完整副本 + zip（默认不含可重建的 bin/obj/publish；加 `-IncludePublish` 连可运行产物一起，约 62 MB 压缩包） |
 
 > 无界面入口（self-test / render-smoke / file-smoke）**不会构造主窗口**，因此可以在没有桌面会话的机器上跑。

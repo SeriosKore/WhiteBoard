@@ -1,4 +1,4 @@
-# WhiteBoard
+﻿# WhiteBoard
 
 > *Insprited by Seewo Notes, Refer to excalidraw, Based on personal experience,
 > I gonna designed a app to satisfy own requirement.*
@@ -6,7 +6,7 @@
 
 一个给课堂用的**手写白板**：用笔或手指写字、画几何图形、擦改、写文字、翻页，存成 `.wb` 画板文件，也能导出 PNG 交给学生。
 
-当前版本：**preview v0.1b**（S1 基础版 · 代码侧已完成）
+当前版本：**[preview v0.1b](https://github.com/SeriosKore/WhiteBoard/releases/tag/preview-v0.1b)**（S1 基础版 · 代码侧已完成）
 
 ---
 
